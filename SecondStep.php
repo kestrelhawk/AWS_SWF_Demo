@@ -1,12 +1,10 @@
 <?php
 
-require_once "path/to/aws.phar";
-
-use Aws\Swf\SwfClient;
+require_once( 'config.php' );
 
 // Ask SWF for things the decider needs to know
 $result = $client->pollForDecisionTask(array(
-    "domain" => "your domain name",
+    "domain" => $settings['domain']['name'],
     "taskList" => array(
         "name" => "mainTaskList"
     ),
@@ -76,4 +74,9 @@ else if($continue_workflow === false){
             )
         )
     ));
+}
+
+// Temporary error
+else {
+    echo '$continue_workflow does not exist!';
 }

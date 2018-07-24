@@ -1,10 +1,10 @@
 <?php
-
+require_once('config.php');
 // Create activity workers. And spin them up
 
 // Check with SWF for activities
 $result = $client->pollForActivityTask(array(
-    "domain" => "domain name you registered",
+    "domain" => $settings['domain']['name'],
     "taskList" => array(
         "name" => "mainTaskList"
     )
@@ -14,7 +14,7 @@ $result = $client->pollForActivityTask(array(
 $task_token = $result["taskToken"];
 
 // Do things on the computer that this script is saved on
-exec("my program i want to execute");
+exec("echo 'this is a test execution!'");
 
 // Tell SWF that we finished what we need to do on this node
 $client->respondActivityTaskCompleted(array(

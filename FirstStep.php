@@ -1,29 +1,19 @@
 <?php
-
-require_once "path/to/aws.phar";
-
-use Aws\Swf\SwfClient;
-
-// Create an instance of the SWF class
-$client = SwfClient::factory(array(
-    "key" => "your_aws_key",
-    "secret" => "your_aws_secret_key",
-    "region" => "your_aws_region"
-));
+require_once( 'config.php' );
 
 // Register your domain
 $client->registerDomain(array(
-    "name" => "domain name you want",
-    "description" => "this is a test domain",
+    "name" => $settings['domain']['name'],
+    "description" => $settings['domain']['description'],
     "workflowExecutionRetentionPeriodInDays" => "7"
 ));
 
 // Register your workflow
 $client->registerWorkflowType(array(
-    "domain" => "domain name you registered in previous call",
-    "name" => "workflow name you want",
+    "domain" => $settings['domain']['name'],
+    "name" => $settings['workflow']['name'],
     "version" => "1.0",
-    "description" => "this is a sample",
+    "description" => $settings['workflow']['description'],
     "defaultTaskList" => array(
         "name" => "mainTaskList"
     ),
@@ -32,10 +22,10 @@ $client->registerWorkflowType(array(
 
 // Register an activity
 $client->registerActivityType(array(
-    "domain" => "domain name you registered above",
-    "name" => "activity name you want",
+    "domain" => $settings['domain']['name'],
+    "name" => $settings['activity']['name'],
     "version" => "1.0",
-    "description" => "first activity in our workflow",
+    "description" => $settings['activity']['description'],
     "defaultTaskList" => array(
         "name" => "mainTaskList"
     )

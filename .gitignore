@@ -1,0 +1,5 @@
+credentials.php
+vendor/
+aws-sfw.cde-workspace
+composer.lock
+.vscode/
